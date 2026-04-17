@@ -3,32 +3,44 @@
 
     <div class="col-lg-8">
 
-      <div class="sort-bar bg-white rounded border d-flex gap-2 p-2 mb-2">
-        <button
-          class="sort-btn"
-          [class.active]="sortBy === 'hot'"
-          (click)="setSort('hot')"
-        >
-          🔥 Quente
+      @if (searchQuery) {
+        <div class="alert alert-light border mb-2 d-flex align-items-center justify-content-between py-2">
+          <span class="small">
+            Resultados para: <strong>{{ searchQuery }}</strong>
+            — {{ allPosts.length }} post(s) encontrado(s)
+          </span>
+        </div>
+      }
+
+      <div class="sort-bar bg-body-tertiary rounded border d-flex gap-2 p-2 mb-2">
+        <button class="sort-btn" [class.active]="sortBy === 'hot'" (click)="setSort('hot')">
+          Quente
         </button>
-        <button
-          class="sort-btn"
-          [class.active]="sortBy === 'new'"
-          (click)="setSort('new')"
-        >
-          ✨ Novo
+        <button class="sort-btn" [class.active]="sortBy === 'new'" (click)="setSort('new')">
+          Novo
         </button>
-        <button
-          class="sort-btn"
-          [class.active]="sortBy === 'top'"
-          (click)="setSort('top')"
-        >
-          📈 Top
+        <button class="sort-btn" [class.active]="sortBy === 'top'" (click)="setSort('top')">
+          Top
         </button>
       </div>
 
-      @for (post of posts; track post.id) {
+      @if (allPosts.length === 0) {
+        <div class="bg-body-tertiary rounded border p-5 text-center">
+          <p class="text-muted mb-1 fw-semibold">Nenhum resultado encontrado</p>
+          <p class="text-muted small">Tente pesquisar por outro termo.</p>
+        </div>
+      }
+
+      @for (post of displayedPosts; track post.id) {
         <app-post-card [post]="post" />
+      }
+
+      @if (hasMore) {
+        <div class="text-center py-2">
+          <button class="btn btn-outline-secondary btn-sm px-4" (click)="loadMore()">
+            Carregar mais ({{ allPosts.length - displayedPosts.length }} restantes)
+          </button>
+        </div>
       }
 
     </div>
@@ -40,7 +52,7 @@
         </div>
         <div class="card-body">
           <p class="card-text small">
-            O Reddit Clone e um lugar para comunidades, onde as pessoas votam no conteudo que importa.
+            Um lugar para comunidades, onde as pessoas votam no conteudo que importa.
           </p>
           <div class="d-grid gap-2">
             <button class="btn btn-primary btn-sm">Criar Post</button>
@@ -54,7 +66,9 @@
         <ul class="list-group list-group-flush">
           @for (sub of ['angular', 'webdev', 'programming', 'todayilearned', 'technology']; track sub) {
             <li class="list-group-item list-group-item-action small py-2">
-              <span class="fw-semibold">r/{{ sub }}</span>
+              <a [routerLink]="['/r', sub]" class="text-decoration-none fw-semibold">
+                r/{{ sub }}
+              </a>
             </li>
           }
         </ul>

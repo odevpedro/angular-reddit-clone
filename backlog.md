@@ -9,7 +9,7 @@
 
 Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de dominio do ecossistema Angular moderno.
 
-**Versao atual:** `0.1.0`
+**Versao atual:** `0.2.0`
 **Repositorio:** [github.com/odevpedro/angular-reddit-clone](https://github.com/odevpedro/angular-reddit-clone)
 **Stack principal:** Angular 19.2, Bootstrap 5.3, TypeScript 5.7
 
@@ -38,23 +38,13 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 
 ## Pendentes
 
-### Melhorias de UX
-
-| Status | Prioridade | Tamanho | Tarefa |
-|--------|------------|---------|--------|
-| `[ ]`  | P2         | S       | Pagina 404 customizada |
-| `[ ]`  | P2         | S       | Loading spinner enquanto componentes lazy carregam |
-| `[ ]`  | P3         | M       | Busca funcional no header (filtrar posts por titulo) |
-| `[ ]`  | P3         | S       | Paginacao ou scroll infinito no feed |
-| `[ ]`  | P3         | M       | Modo escuro (Dark Mode) |
-
 ### Integracao com Backend (fase futura)
 
 | Status | Prioridade | Tamanho | Tarefa |
 |--------|------------|---------|--------|
 | `[ ]`  | P1         | XL      | Substituir dados mockados por chamadas HTTP reais |
 | `[ ]`  | P1         | M       | HTTP interceptor para injecao de token JWT |
-| `[ ]`  | P2         | M       | Persistir estado de autenticacao no localStorage |
+| `[x]`  | P2         | M       | Persistir estado de autenticacao no localStorage |
 
 ---
 
@@ -82,6 +72,12 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 | 2026-04-17 | RegisterComponent com formulario reativo, validacao e confirmacao de senha |
 | 2026-04-17 | AuthGuard funcional protegendo rotas autenticadas |
 | 2026-04-17 | Header atualizado com estado de autenticacao (usuario logado vs. botoes de auth) |
+| 2026-04-17 | Pagina 404 customizada (NotFoundComponent) |
+| 2026-04-17 | Loading bar animada no topo durante navegacao lazy |
+| 2026-04-17 | Busca funcional no header com debounce 300ms (filtra titulo, subreddit e autor) |
+| 2026-04-17 | Paginacao "Carregar mais" no feed com contador de posts restantes |
+| 2026-04-17 | Dark Mode com Bootstrap 5.3 data-bs-theme, toggle no header e persistencia em localStorage |
+| 2026-04-17 | .gitattributes configurado para TypeScript aparecer como linguagem principal no GitHub |
 
 ---
 
@@ -95,7 +91,6 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 
 ## Notas e Decisoes Pendentes
 
-- Estado de autenticacao nao persiste entre refreshes de pagina (sem localStorage ainda)
 - Dados sao todos mockados — sem backend real por enquanto
 - Gerenciamento de estado usa RxJS BehaviorSubject em servicos (decisao tomada: sem NgRx nesta fase)
 
@@ -107,3 +102,4 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 |---------|------------|---------------------|
 | `0.0.0` | 2026-04-17 | Scaffold Angular CLI, Bootstrap, HeaderComponent |
 | `0.1.0` | 2026-04-17 | Frontend completo: Home, Subreddit, PostDetail, Auth, votos e comentarios |
+| `0.2.0` | 2026-04-17 | UX: 404, loading bar, busca, paginacao, dark mode |

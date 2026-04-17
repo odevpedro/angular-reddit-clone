@@ -8,3 +8,20 @@ body {
   background-color: #dae0e6;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
+
+[data-bs-theme="dark"] body {
+  background-color: #1a1a1b;
+}
+
+[data-bs-theme="dark"] .vote-col {
+  background-color: #272729 !important;
+  border-right-color: #343536 !important;
+}
+
+[data-bs-theme="dark"] .post-card:hover {
+  border-color: #818384 !important;
+}
+
+[data-bs-theme="dark"] .sort-bar {
+  background-color: #272729 !important;
+}

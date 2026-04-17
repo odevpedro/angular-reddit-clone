@@ -1,29 +1,36 @@
-<nav class="navbar bg-white border-bottom sticky-top px-3 py-1">
+<nav class="navbar bg-body-tertiary border-bottom sticky-top px-3 py-1">
   <a [routerLink]="['/']" class="d-flex align-items-center gap-2 text-decoration-none flex-shrink-0">
     <svg width="32" height="32" viewBox="0 0 20 20" fill="#ff4500" xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="10" r="10"/>
       <path d="M16.67 10a1.46 1.46 0 0 0-2.47-1 7.12 7.12 0 0 0-3.85-1.23l.65-3.07 2.13.45a1 1 0 1 0 .18-.61l-2.38-.5a.18.18 0 0 0-.22.14l-.73 3.43a7.14 7.14 0 0 0-3.89 1.23 1.46 1.46 0 1 0-1.61 2.39 2.87 2.87 0 0 0 0 .44c0 2.24 2.61 4.06 5.83 4.06s5.83-1.82 5.83-4.06a2.87 2.87 0 0 0 0-.44 1.46 1.46 0 0 0 .53-1.23zm-9.4 1.08a1 1 0 1 1 1 1 1 1 0 0 1-1-1zm5.55 2.64a3.44 3.44 0 0 1-2.82.83 3.44 3.44 0 0 1-2.82-.83.18.18 0 0 1 .25-.25 3.07 3.07 0 0 0 2.57.65 3.07 3.07 0 0 0 2.57-.65.18.18 0 0 1 .25.25zm-.17-1.64a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" fill="white"/>
     </svg>
-    <span class="fw-bold text-dark d-none d-md-inline" style="font-size: 1.1rem;">reddit</span>
+    <span class="fw-bold d-none d-md-inline" style="font-size: 1.1rem;">reddit</span>
   </a>
 
-  <div class="flex-grow-1 mx-3" style="max-width: 680px;">
+  <div class="flex-grow-1 mx-3 position-relative" style="max-width: 680px;">
     <input
       type="search"
-      class="form-control form-control-sm bg-light border"
-      placeholder="Pesquisar no Reddit"
+      class="form-control form-control-sm"
+      placeholder="Pesquisar posts, subreddits ou autores..."
+      [formControl]="searchControl"
     />
   </div>
 
-  @if (user$ | async; as user) {
-    <div class="d-flex align-items-center gap-2 flex-shrink-0">
-      <span class="small fw-semibold text-dark d-none d-md-inline">u/{{ user.username }}</span>
+  <div class="d-flex align-items-center gap-2 flex-shrink-0">
+    <button
+      class="btn btn-sm btn-outline-secondary theme-toggle"
+      (click)="toggleTheme()"
+      [title]="(isDark$ | async) ? 'Modo claro' : 'Modo escuro'"
+    >
+      @if (isDark$ | async) { Claro } @else { Escuro }
+    </button>
+
+    @if (user$ | async; as user) {
+      <span class="small fw-semibold d-none d-md-inline">u/{{ user.username }}</span>
       <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Sair</button>
-    </div>
-  } @else {
-    <div class="d-flex gap-2 flex-shrink-0">
+    } @else {
       <a [routerLink]="['/login']" class="btn btn-outline-primary btn-sm">Entrar</a>
       <a [routerLink]="['/register']" class="btn btn-primary btn-sm">Cadastrar</a>
-    </div>
-  }
+    }
+  </div>
 </nav>

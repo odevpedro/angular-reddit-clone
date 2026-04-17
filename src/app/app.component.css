@@ -1,0 +1,21 @@
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background-color: #ff4500;
+  z-index: 9999;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.loading-bar.active {
+  opacity: 1;
+  animation: loading-fill 0.8s ease forwards;
+}
+
+@keyframes loading-fill {
+  from { width: 0; }
+  to   { width: 85%; }
+}
