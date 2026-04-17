@@ -1,0 +1,106 @@
+@if (notFound) {
+  <div class="container py-5 text-center">
+    <h3 class="text-muted">Post não encontrado</h3>
+  </div>
+} @else if (post) {
+  <div class="container py-3">
+    <div class="row g-3">
+      <div class="col-lg-8">
+
+        <div class="bg-white rounded border p-0 mb-3">
+          <div class="d-flex">
+            <div class="vote-col d-flex flex-column align-items-center p-2 gap-1">
+              <button
+                class="vote-btn"
+                [class.active-up]="post.userVote === 1"
+                (click)="vote(1)"
+              >▲</button>
+              <span class="vote-score fw-bold small"
+                [class.text-danger]="post.userVote === 1"
+                [class.text-primary]="post.userVote === -1"
+              >{{ formatScore(post.score) }}</span>
+              <button
+                class="vote-btn"
+                [class.active-down]="post.userVote === -1"
+                (click)="vote(-1)"
+              >▼</button>
+            </div>
+
+            <div class="p-3 flex-grow-1">
+              <div class="small text-muted mb-1">
+                <span class="fw-semibold text-dark">r/{{ post.subreddit }}</span>
+                &nbsp;•&nbsp; Postado por u/{{ post.author }}
+                &nbsp;•&nbsp; {{ timeAgo(post.createdAt) }}
+              </div>
+              <h5 class="fw-bold mb-2">{{ post.title }}</h5>
+
+              @if (post.imageUrl) {
+                <img [src]="post.imageUrl" alt="Post image" class="img-fluid rounded mb-2" />
+              }
+              @if (post.content) {
+                <p class="mb-2">{{ post.content }}</p>
+              }
+
+              <div class="small text-muted">
+                💬 {{ post.commentCount }} Comentários
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded border p-3">
+          @if (currentUser$ | async; as user) {
+            <div class="mb-3">
+              <p class="small text-muted mb-1">Comentando como <strong>u/{{ user.username }}</strong></p>
+              <textarea
+                class="form-control mb-2"
+                rows="4"
+                placeholder="O que você acha?"
+                [formControl]="commentControl"
+              ></textarea>
+              <button
+                class="btn btn-primary btn-sm"
+                [disabled]="commentControl.invalid"
+                (click)="submitComment()"
+              >
+                Comentar
+              </button>
+            </div>
+            <hr />
+          } @else {
+            <div class="alert alert-light border text-center mb-3">
+              <a routerLink="/login" class="text-primary fw-semibold">Faça login</a>
+              ou
+              <a routerLink="/register" class="text-primary fw-semibold">cadastre-se</a>
+              para deixar um comentário.
+            </div>
+          }
+
+          <div class="comments-section">
+            @if (comments.length === 0) {
+              <p class="text-muted text-center py-3">Seja o primeiro a comentar!</p>
+            }
+            @for (comment of comments; track comment.id) {
+              <app-comment [comment]="comment" [postId]="post.id" />
+            }
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div class="card border">
+          <div class="card-header fw-bold small">Sobre r/{{ post.subreddit }}</div>
+          <div class="card-body">
+            <p class="small text-muted">
+              Explore mais posts desta comunidade.
+            </p>
+            <a [routerLink]="['/r', post.subreddit]" class="btn btn-outline-primary btn-sm w-100">
+              Visitar r/{{ post.subreddit }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,63 @@
+.comment {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.comment-thread-line {
+  width: 2px;
+  min-width: 2px;
+  background-color: #edeff1;
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.comment-thread-line:hover {
+  background-color: #0079d3;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-body {
+  font-size: 0.9rem;
+  color: #1c1c1c;
+  line-height: 1.5;
+}
+
+.vote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #878a8c;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.vote-btn:hover { color: #cc3700; }
+.vote-btn.active-up { color: #cc3700; }
+.vote-btn.active-down { color: #7193ff; }
+
+.action-btn {
+  background: none;
+  border: none;
+  color: #878a8c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #e8e8e8;
+  color: #1c1c1c;
+}
+
+.comment-replies {
+  border-left: 2px solid #edeff1;
+  padding-left: 8px;
+}

@@ -1,0 +1,92 @@
+<div class="auth-page d-flex align-items-center justify-content-center">
+  <div class="auth-card card border p-4" style="width: 100%; max-width: 400px;">
+
+    <div class="text-center mb-4">
+      <svg width="48" height="48" viewBox="0 0 20 20" fill="#ff4500" xmlns="http://www.w3.org/2000/svg" class="mb-2">
+        <circle cx="10" cy="10" r="10"/>
+        <path d="M16.67 10a1.46 1.46 0 0 0-2.47-1 7.12 7.12 0 0 0-3.85-1.23l.65-3.07 2.13.45a1 1 0 1 0 .18-.61l-2.38-.5a.18.18 0 0 0-.22.14l-.73 3.43a7.14 7.14 0 0 0-3.89 1.23 1.46 1.46 0 1 0-1.61 2.39 2.87 2.87 0 0 0 0 .44c0 2.24 2.61 4.06 5.83 4.06s5.83-1.82 5.83-4.06a2.87 2.87 0 0 0 0-.44 1.46 1.46 0 0 0 .53-1.23zm-9.4 1.08a1 1 0 1 1 1 1 1 1 0 0 1-1-1zm5.55 2.64a3.44 3.44 0 0 1-2.82.83 3.44 3.44 0 0 1-2.82-.83.18.18 0 0 1 .25-.25 3.07 3.07 0 0 0 2.57.65 3.07 3.07 0 0 0 2.57-.65.18.18 0 0 1 .25.25zm-.17-1.64a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" fill="white"/>
+      </svg>
+      <h5 class="fw-bold mb-0">Criar conta</h5>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label class="form-label small fw-semibold">Nome de usuário</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="fieldError('username', 'required') || fieldError('username', 'minlength') || fieldError('username', 'maxlength')"
+          formControlName="username"
+          placeholder="u/seu-usuario"
+        />
+        @if (fieldError('username', 'required')) {
+          <div class="invalid-feedback">Nome de usuário obrigatório.</div>
+        }
+        @if (fieldError('username', 'minlength')) {
+          <div class="invalid-feedback">Mínimo 3 caracteres.</div>
+        }
+        @if (fieldError('username', 'maxlength')) {
+          <div class="invalid-feedback">Máximo 20 caracteres.</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small fw-semibold">E-mail</label>
+        <input
+          type="email"
+          class="form-control"
+          [class.is-invalid]="fieldError('email', 'required') || fieldError('email', 'email')"
+          formControlName="email"
+          placeholder="voce@email.com"
+        />
+        @if (fieldError('email', 'required')) {
+          <div class="invalid-feedback">E-mail obrigatório.</div>
+        }
+        @if (fieldError('email', 'email')) {
+          <div class="invalid-feedback">E-mail inválido.</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small fw-semibold">Senha</label>
+        <input
+          type="password"
+          class="form-control"
+          [class.is-invalid]="fieldError('password', 'required') || fieldError('password', 'minlength')"
+          formControlName="password"
+          placeholder="••••••"
+        />
+        @if (fieldError('password', 'required')) {
+          <div class="invalid-feedback">Senha obrigatória.</div>
+        }
+        @if (fieldError('password', 'minlength')) {
+          <div class="invalid-feedback">Mínimo 6 caracteres.</div>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small fw-semibold">Confirmar senha</label>
+        <input
+          type="password"
+          class="form-control"
+          [class.is-invalid]="passwordMismatch"
+          formControlName="confirmPassword"
+          placeholder="••••••"
+        />
+        @if (passwordMismatch) {
+          <div class="invalid-feedback">As senhas não coincidem.</div>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 fw-bold" [disabled]="form.invalid">
+        Criar conta
+      </button>
+    </form>
+
+    <hr />
+    <p class="text-center small mb-0">
+      Já tem conta?
+      <a routerLink="/login" class="text-primary fw-semibold">Entrar</a>
+    </p>
+  </div>
+</div>

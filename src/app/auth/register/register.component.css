@@ -1,0 +1,9 @@
+.auth-page {
+  min-height: calc(100vh - 60px);
+  background-color: #dae0e6;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background-color: #fff;
+}

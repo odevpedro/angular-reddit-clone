@@ -1,0 +1,80 @@
+.post-card {
+  transition: border-color 0.15s;
+  cursor: pointer;
+}
+
+.post-card:hover {
+  border-color: #818384 !important;
+}
+
+.vote-col {
+  min-width: 40px;
+  background-color: #f8f9fa;
+  border-radius: 4px 0 0 4px;
+  border-right: 1px solid #edeff1;
+}
+
+.vote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #878a8c;
+  font-size: 1rem;
+  padding: 2px 4px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.vote-btn:hover {
+  color: #cc3700;
+  background-color: #e8e8e8;
+}
+
+.vote-btn.active-up {
+  color: #cc3700;
+}
+
+.vote-btn.active-down {
+  color: #7193ff;
+}
+
+.vote-score {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1c1c1c;
+}
+
+.post-title {
+  font-size: 1rem;
+  color: #1c1c1c;
+  font-weight: 500;
+}
+
+.post-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-img {
+  max-height: 80px;
+  max-width: 140px;
+  object-fit: cover;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: #878a8c;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #e8e8e8;
+  color: #1c1c1c;
+}

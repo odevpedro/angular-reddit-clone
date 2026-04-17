@@ -1,0 +1,11 @@
+.subreddit-banner {
+  height: 80px;
+  width: 100%;
+}
+
+.subreddit-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}

@@ -1,0 +1,20 @@
+.vote-col {
+  min-width: 40px;
+  background-color: #f8f9fa;
+  border-radius: 4px 0 0 4px;
+  border-right: 1px solid #edeff1;
+}
+
+.vote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #878a8c;
+  font-size: 1rem;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.vote-btn:hover { color: #cc3700; }
+.vote-btn.active-up { color: #cc3700; }
+.vote-btn.active-down { color: #7193ff; }

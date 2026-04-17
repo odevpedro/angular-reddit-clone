@@ -1,0 +1,67 @@
+<div class="comment">
+  <div class="comment-thread-line"></div>
+
+  <div class="comment-content">
+    <div class="comment-meta small text-muted mb-1">
+      <span class="fw-semibold text-dark">u/{{ comment.author }}</span>
+      &nbsp;•&nbsp;
+      <span
+        class="fw-bold"
+        [class.text-danger]="comment.userVote === 1"
+        [class.text-primary]="comment.userVote === -1"
+      >{{ formatScore(comment.score) }} pontos</span>
+      &nbsp;•&nbsp;
+      {{ timeAgo(comment.createdAt) }}
+    </div>
+
+    <p class="comment-body mb-1">{{ comment.body }}</p>
+
+    <div class="comment-actions d-flex align-items-center gap-2">
+      <button
+        class="vote-btn"
+        [class.active-up]="comment.userVote === 1"
+        (click)="vote(1)"
+        title="Upvote"
+      >▲</button>
+      <button
+        class="vote-btn"
+        [class.active-down]="comment.userVote === -1"
+        (click)="vote(-1)"
+        title="Downvote"
+      >▼</button>
+
+      @if (currentUser$ | async) {
+        <button class="action-btn" (click)="replyOpen = !replyOpen">
+          💬 Responder
+        </button>
+      }
+    </div>
+
+    @if (replyOpen) {
+      <div class="reply-form mt-2">
+        <textarea
+          class="form-control form-control-sm mb-1"
+          rows="2"
+          placeholder="Escreva uma resposta..."
+          [formControl]="replyControl"
+        ></textarea>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary btn-sm" [disabled]="replyControl.invalid" (click)="submitReply()">
+            Responder
+          </button>
+          <button class="btn btn-outline-secondary btn-sm" (click)="replyOpen = false">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (comment.replies.length > 0) {
+      <div class="comment-replies mt-2">
+        @for (reply of comment.replies; track reply.id) {
+          <app-comment [comment]="reply" [postId]="postId" />
+        }
+      </div>
+    }
+  </div>
+</div>

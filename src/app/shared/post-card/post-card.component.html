@@ -1,0 +1,53 @@
+<div class="post-card d-flex bg-white rounded border mb-2">
+
+  <div class="vote-col d-flex flex-column align-items-center p-2 gap-1">
+    <button
+      class="vote-btn"
+      [class.active-up]="post.userVote === 1"
+      (click)="vote($event, 1)"
+      title="Upvote"
+    >▲</button>
+    <span class="vote-score"
+      [class.text-danger]="post.userVote === 1"
+      [class.text-primary]="post.userVote === -1"
+    >{{ formatScore(post.score) }}</span>
+    <button
+      class="vote-btn"
+      [class.active-down]="post.userVote === -1"
+      (click)="vote($event, -1)"
+      title="Downvote"
+    >▼</button>
+  </div>
+
+  <a
+    class="post-body p-2 flex-grow-1 text-decoration-none text-dark"
+    [routerLink]="['/r', post.subreddit, 'comments', post.id]"
+  >
+    <div class="post-meta text-muted small mb-1">
+      <a
+        class="fw-semibold text-dark text-decoration-none"
+        [routerLink]="['/r', post.subreddit]"
+        (click)="$event.stopPropagation()"
+      >r/{{ post.subreddit }}</a>
+      &nbsp;•&nbsp;
+      Postado por u/{{ post.author }}
+      &nbsp;•&nbsp;
+      {{ timeAgo(post.createdAt) }}
+    </div>
+
+    <h6 class="post-title mb-1">{{ post.title }}</h6>
+
+    @if (post.content) {
+      <p class="post-content text-muted small mb-1">{{ post.content }}</p>
+    }
+
+    <div class="post-actions d-flex gap-3 mt-1">
+      <span class="action-label small">
+        💬 {{ post.commentCount }} Comentários
+      </span>
+      <span class="action-label small">🔗 Compartilhar</span>
+      <span class="action-label small">🔖 Salvar</span>
+    </div>
+  </a>
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container py-3">
+  <div class="row g-3">
+
+    <div class="col-lg-8">
+
+      <div class="sort-bar bg-white rounded border d-flex gap-2 p-2 mb-2">
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'hot'"
+          (click)="setSort('hot')"
+        >
+          🔥 Quente
+        </button>
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'new'"
+          (click)="setSort('new')"
+        >
+          ✨ Novo
+        </button>
+        <button
+          class="sort-btn"
+          [class.active]="sortBy === 'top'"
+          (click)="setSort('top')"
+        >
+          📈 Top
+        </button>
+      </div>
+
+      @for (post of posts; track post.id) {
+        <app-post-card [post]="post" />
+      }
+
+    </div>
+
+    <div class="col-lg-4 d-none d-lg-block">
+      <div class="card border">
+        <div class="card-header bg-primary text-white fw-bold">
+          Bem-vindo ao Reddit Clone
+        </div>
+        <div class="card-body">
+          <p class="card-text small">
+            O Reddit Clone e um lugar para comunidades, onde as pessoas votam no conteudo que importa.
+          </p>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-sm">Criar Post</button>
+            <button class="btn btn-outline-secondary btn-sm">Criar Comunidade</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border mt-3">
+        <div class="card-header fw-bold small">Comunidades Populares</div>
+        <ul class="list-group list-group-flush">
+          @for (sub of ['angular', 'webdev', 'programming', 'todayilearned', 'technology']; track sub) {
+            <li class="list-group-item list-group-item-action small py-2">
+              <span class="fw-semibold">r/{{ sub }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

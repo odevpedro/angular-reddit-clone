@@ -1,0 +1,16 @@
+.sort-btn {
+  background: none;
+  border: none;
+  color: #878a8c;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.sort-btn:hover,
+.sort-btn.active {
+  background-color: #e8e8e8;
+  color: #1c1c1c;
+}

@@ -1,0 +1,72 @@
+@if (notFound) {
+  <div class="container py-5 text-center">
+    <h3 class="text-muted">Comunidade não encontrada</h3>
+    <p class="text-muted">O subreddit que você buscou não existe ou foi removido.</p>
+  </div>
+} @else if (subreddit) {
+
+  <div class="subreddit-banner" [style.background-color]="subreddit.bannerColor"></div>
+
+  <div class="container">
+    <div class="subreddit-header bg-white border-bottom px-3 py-2 d-flex align-items-center gap-3 mb-3">
+      <div
+        class="subreddit-icon d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+        [style.background-color]="subreddit.bannerColor"
+      >
+        r/
+      </div>
+      <div>
+        <h4 class="mb-0 fw-bold">r/{{ subreddit.name }}</h4>
+        <small class="text-muted">{{ subreddit.title }}</small>
+      </div>
+      <button class="btn btn-primary btn-sm ms-auto">Participar</button>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-8">
+        @if (posts.length === 0) {
+          <div class="bg-white rounded border p-4 text-center text-muted">
+            Nenhum post nesta comunidade ainda.
+          </div>
+        }
+        @for (post of posts; track post.id) {
+          <app-post-card [post]="post" />
+        }
+      </div>
+
+      <div class="col-lg-4 d-none d-lg-block">
+        <div class="card border">
+          <div class="card-header fw-bold" [style.background-color]="subreddit.bannerColor" style="color:white;">
+            Sobre a Comunidade
+          </div>
+          <div class="card-body">
+            <p class="small">{{ subreddit.description }}</p>
+            <hr />
+            <div class="d-flex justify-content-between small mb-2">
+              <div>
+                <div class="fw-bold">{{ formatCount(subreddit.memberCount) }}</div>
+                <div class="text-muted">Membros</div>
+              </div>
+              <div>
+                <div class="fw-bold text-success">● {{ formatCount(subreddit.onlineCount) }}</div>
+                <div class="text-muted">Online</div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm w-100 mb-2">Criar Post</button>
+          </div>
+        </div>
+
+        <div class="card border mt-3">
+          <div class="card-header fw-bold small">Regras</div>
+          <ul class="list-group list-group-flush">
+            @for (rule of subreddit.rules; track $index) {
+              <li class="list-group-item small py-2">
+                {{ $index + 1 }}. {{ rule }}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+}

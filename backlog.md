@@ -9,7 +9,7 @@
 
 Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de dominio do ecossistema Angular moderno.
 
-**Versao atual:** `0.0.0`
+**Versao atual:** `0.1.0`
 **Repositorio:** [github.com/odevpedro/angular-reddit-clone](https://github.com/odevpedro/angular-reddit-clone)
 **Stack principal:** Angular 19.2, Bootstrap 5.3, TypeScript 5.7
 
@@ -32,62 +32,29 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 
 ## Em Andamento
 
-> Features atualmente sendo desenvolvidas. Idealmente, maximo de 2-3 itens simultaneos.
-
-<!-- Nenhuma feature em andamento no momento -->
+> Nenhuma feature em andamento no momento.
 
 ---
 
 ## Pendentes
 
-### Infraestrutura
+### Melhorias de UX
 
 | Status | Prioridade | Tamanho | Tarefa |
 |--------|------------|---------|--------|
-| `[ ]`  | P0         | S       | Substituir template padrao do AppComponent pelo layout base (header + router-outlet) |
-| `[ ]`  | P0         | S       | Implementar template HTML e CSS do HeaderComponent com navbar Bootstrap |
-| `[ ]`  | P0         | XS      | Configurar rota raiz com lazy loading no app.routes.ts |
+| `[ ]`  | P2         | S       | Pagina 404 customizada |
+| `[ ]`  | P2         | S       | Loading spinner enquanto componentes lazy carregam |
+| `[ ]`  | P3         | M       | Busca funcional no header (filtrar posts por titulo) |
+| `[ ]`  | P3         | S       | Paginacao ou scroll infinito no feed |
+| `[ ]`  | P3         | M       | Modo escuro (Dark Mode) |
 
-### Feature: Home — Feed de Posts
-
-| Status | Prioridade | Tamanho | Tarefa |
-|--------|------------|---------|--------|
-| `[ ]`  | P1         | M       | Criar componente PostCardComponent (titulo, autor, subreddit, votos, nr. comentarios) |
-| `[ ]`  | P1         | M       | Criar PostService com dados mockados (lista de posts) |
-| `[ ]`  | P1         | M       | Criar pagina HomeComponent com feed de PostCards |
-| `[ ]`  | P2         | S       | Adicionar ordenacao do feed (Quente, Novo, Top) |
-
-### Feature: Subreddit
+### Integracao com Backend (fase futura)
 
 | Status | Prioridade | Tamanho | Tarefa |
 |--------|------------|---------|--------|
-| `[ ]`  | P1         | M       | Criar SubredditComponent com banner, descricao e feed filtrado |
-| `[ ]`  | P2         | S       | Criar SubredditService com dados mockados |
-| `[ ]`  | P2         | XS      | Rota dinamica `/r/:subreddit` com lazy loading |
-
-### Feature: Post — Thread com Comentarios
-
-| Status | Prioridade | Tamanho | Tarefa |
-|--------|------------|---------|--------|
-| `[ ]`  | P1         | L       | Criar PostDetailComponent com titulo, corpo e secao de comentarios |
-| `[ ]`  | P1         | M       | Criar CommentComponent recursivo para comentarios aninhados |
-| `[ ]`  | P2         | S       | Rota dinamica `/r/:subreddit/comments/:id` |
-
-### Feature: Auth
-
-| Status | Prioridade | Tamanho | Tarefa |
-|--------|------------|---------|--------|
-| `[ ]`  | P2         | M       | Criar LoginComponent com formulario reativo |
-| `[ ]`  | P2         | M       | Criar AuthService com estado de usuario (BehaviorSubject) |
-| `[ ]`  | P2         | S       | AuthGuard para rotas protegidas |
-| `[ ]`  | P3         | M       | Criar RegisterComponent |
-
-### Feature: Votacao
-
-| Status | Prioridade | Tamanho | Tarefa |
-|--------|------------|---------|--------|
-| `[ ]`  | P2         | M       | Adicionar upvote/downvote em PostCardComponent |
-| `[ ]`  | P3         | M       | Adicionar upvote/downvote em CommentComponent |
+| `[ ]`  | P1         | XL      | Substituir dados mockados por chamadas HTTP reais |
+| `[ ]`  | P1         | M       | HTTP interceptor para injecao de token JWT |
+| `[ ]`  | P2         | M       | Persistir estado de autenticacao no localStorage |
 
 ---
 
@@ -97,7 +64,24 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 |------------|--------|
 | 2026-04-17 | Scaffold inicial com Angular CLI 19.2.6 |
 | 2026-04-17 | Bootstrap 5.3 instalado e importado em styles.css |
-| 2026-04-17 | HeaderComponent gerado via Angular CLI |
+| 2026-04-17 | HeaderComponent com navbar Bootstrap (logo, busca, botoes de auth) |
+| 2026-04-17 | AppComponent refatorado para layout base (header + router-outlet) |
+| 2026-04-17 | app.routes.ts configurado com rota raiz lazy loading |
+| 2026-04-17 | Post model e PostService com 7 posts mockados e logica de voto |
+| 2026-04-17 | PostCardComponent com upvote/downvote, metadata e RouterLink |
+| 2026-04-17 | HomeComponent com feed de posts e ordenacao (Quente, Novo, Top) |
+| 2026-04-17 | Comment model e CommentService com 15 comentarios mockados e arvore recursiva |
+| 2026-04-17 | CommentComponent standalone recursivo com upvote/downvote e resposta inline |
+| 2026-04-17 | Subreddit model e SubredditService com 5 subreddits mockados |
+| 2026-04-17 | SubredditComponent com banner, descricao, regras e feed filtrado |
+| 2026-04-17 | Rota dinamica /r/:subreddit com lazy loading |
+| 2026-04-17 | PostDetailComponent com post completo e arvore de comentarios |
+| 2026-04-17 | Rota dinamica /r/:subreddit/comments/:id com lazy loading |
+| 2026-04-17 | User model e AuthService com login, registro e logout (BehaviorSubject) |
+| 2026-04-17 | LoginComponent com formulario reativo e validacao |
+| 2026-04-17 | RegisterComponent com formulario reativo, validacao e confirmacao de senha |
+| 2026-04-17 | AuthGuard funcional protegendo rotas autenticadas |
+| 2026-04-17 | Header atualizado com estado de autenticacao (usuario logado vs. botoes de auth) |
 
 ---
 
@@ -111,9 +95,9 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 
 ## Notas e Decisoes Pendentes
 
-- Definir se o estado global sera gerenciado com RxJS (BehaviorSubject em services) ou Angular Signals
-- Definir se havera integracao com API real ou se o projeto permanecera com dados mockados
-- Avaliar uso de NgRx para escalar o gerenciamento de estado se a aplicacao crescer
+- Estado de autenticacao nao persiste entre refreshes de pagina (sem localStorage ainda)
+- Dados sao todos mockados — sem backend real por enquanto
+- Gerenciamento de estado usa RxJS BehaviorSubject em servicos (decisao tomada: sem NgRx nesta fase)
 
 ---
 
@@ -122,3 +106,4 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 | Versao  | Data       | Principais entregas |
 |---------|------------|---------------------|
 | `0.0.0` | 2026-04-17 | Scaffold Angular CLI, Bootstrap, HeaderComponent |
+| `0.1.0` | 2026-04-17 | Frontend completo: Home, Subreddit, PostDetail, Auth, votos e comentarios |
