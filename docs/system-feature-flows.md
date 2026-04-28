@@ -11,6 +11,7 @@
 - [Convencoes deste Documento](#convencoes-deste-documento)
 - [Feature: Scaffold Inicial e Bootstrap](#feature-scaffold-inicial-e-bootstrap)
 - [Feature: HeaderComponent](#feature-headercomponent)
+- [Feature: Testes Unitarios](#feature-testes-unitarios)
 
 ---
 
@@ -189,3 +190,52 @@ Nao aplicavel na fase atual (componente sem logica).
 | **Contexto** | O header aparece em todas as paginas, inclusive paginas de erro e de auth |
 | **Decisao** | `HeaderComponent` e renderizado diretamente em `AppComponent`, fora do `<router-outlet>`, garantindo persistencia entre navegacoes |
 | **Consequencias** | O header nao precisa ser redeclarado em nenhuma feature; porem features que nao devem exibir o header (ex.: pagina de login em fullscreen) precisarao de logica adicional para ocultá-lo |
+
+---
+
+# Feature: Testes Unitarios
+
+> **Versao:** 0.3.0
+> **Implementada em:** 2026-04-28
+> **Status:** Concluida (servicos e guard; componentes de feature pendentes)
+
+---
+
+## Resumo
+
+Criacao de suites de testes unitarios com Jasmine/Karma cobrindo todos os servicos da camada `core/` e o guard funcional de autenticacao. Os dois specs de boilerplate gerados pelo CLI (`app.component.spec.ts`, `header.component.spec.ts`) foram corrigidos para refletir o codigo real.
+
+**Motivacao:** O projeto nao possuia cobertura de testes — qualquer mudanca nos servicos ou no guard podia quebrar comportamentos criticos sem sinal de alerta.
+**Resultado:** 64 testes passando; cobertura dos contratos publicos de todos os servicos e do fluxo de autorizacao.
+
+---
+
+## Arquivos Criados / Modificados
+
+| Arquivo | Testes |
+|---------|--------|
+| `core/services/auth.service.spec.ts` | 10 — login, register, logout, persistencia em localStorage, isLoggedIn$ |
+| `core/services/post.service.spec.ts` | 10 — getPosts, getById, getBySubreddit, logica de voto com toggle |
+| `core/services/comment.service.spec.ts` | 10 — getByPost (arvore), addComment, vote com toggle |
+| `core/services/search.service.spec.ts` | 5 — setQuery (trim + lowercase), clear |
+| `core/services/theme.service.spec.ts` | 9 — toggle, init, persistencia localStorage, matchMedia fallback |
+| `core/services/subreddit.service.spec.ts` | 7 — getAll, getByName, formatMemberCount |
+| `core/guards/auth.guard.spec.ts` | 4 — permite rota com usuario logado, bloqueia e redireciona sem usuario |
+| `app.component.spec.ts` | 3 — criacao do componente, estado inicial de loading, elemento na DOM |
+| `header/header.component.spec.ts` | 1 — criacao do componente com provideRouter |
+
+---
+
+## Padroes Adotados
+
+- `firstValueFrom` do RxJS para consumir Observables em testes sincronos
+- `localStorage.clear()` em `beforeEach`/`afterEach` para isolar estado entre testes
+- `window.matchMedia` mockado via `jasmine.createSpy` para `ThemeService`
+- `TestBed.runInInjectionContext` para testar guards funcionais (`CanActivateFn`)
+- `overrideComponent` em `AppComponent` para substituir `HeaderComponent` por mock e evitar cascata de dependencias
+
+---
+
+## Pendencias
+
+- Testes de componentes de feature (LoginComponent, RegisterComponent, HomeComponent, PostCardComponent, CommentComponent) nao foram criados nesta iteracao — envolvem renderizacao de template e interacao com DOM, escopo separado.

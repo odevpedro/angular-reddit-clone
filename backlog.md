@@ -1,7 +1,7 @@
 # Backlog — Angular Reddit Clone
 
 > Registro vivo do progresso do projeto. Atualizado a cada mudanca de estado de uma funcionalidade.
-> **Ultima atualizacao:** 2026-04-17
+> **Ultima atualizacao:** 2026-04-28
 
 ---
 
@@ -46,6 +46,13 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 | `[ ]`  | P1         | M       | HTTP interceptor para injecao de token JWT |
 | `[x]`  | P2         | M       | Persistir estado de autenticacao no localStorage |
 
+### Qualidade
+
+| Status | Prioridade | Tamanho | Tarefa |
+|--------|------------|---------|--------|
+| `[ ]`  | P2         | M       | Testes unitarios para LoginComponent e RegisterComponent |
+| `[ ]`  | P3         | L       | Testes unitarios para HomeComponent, PostCardComponent e CommentComponent |
+
 ---
 
 ## Concluidas
@@ -78,6 +85,7 @@ Clone do Reddit construido com Angular 19 e Bootstrap 5 como exercicio de domini
 | 2026-04-17 | Paginacao "Carregar mais" no feed com contador de posts restantes |
 | 2026-04-17 | Dark Mode com Bootstrap 5.3 data-bs-theme, toggle no header e persistencia em localStorage |
 | 2026-04-17 | .gitattributes configurado para TypeScript aparecer como linguagem principal no GitHub |
+| 2026-04-28 | Testes unitarios criados para todos os servicos (AuthService, PostService, CommentService, SearchService, ThemeService, SubredditService), AuthGuard e AppComponent — 64 testes passando |
 
 ---
 

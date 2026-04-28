@@ -1,29 +1,46 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({ selector: 'app-header', standalone: true, template: '' })
+class MockHeaderComponent {}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jasmine.createSpy('matchMedia').and.returnValue({
+        matches: false,
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      }),
+    });
+
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+      providers: [provideRouter([])],
+    })
+      .overrideComponent(AppComponent, {
+        set: { imports: [CommonModule, RouterOutlet, MockHeaderComponent] },
+      })
+      .compileComponents();
   });
 
-  it('should create the app', () => {
+  it('should create the app component', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it(`should have the 'angular-reddit-clone' title`, () => {
+  it('should start with loading set to false', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-reddit-clone');
+    expect(fixture.componentInstance.loading).toBeFalse();
   });
 
-  it('should render title', () => {
+  it('should render the loading bar element', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-reddit-clone');
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.loading-bar')).toBeTruthy();
   });
 });
